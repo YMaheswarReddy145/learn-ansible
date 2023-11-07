@@ -1,0 +1,114 @@
+Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy and
+  maintain. Automate everything from code deployment to network configuration to cloud management, in a language that
+  approaches plain English, using SSH, with no agents to install on remote systems.
+
+How Ansible solve shell problems.
+    1. Ansible is declarative.
+
+    2. Ansible support heterogeneous by default
+         Ansible it's not  homogeneous, so mostly the code we have write it certain percentage of the code will run
+          in other operating systems but may not be exactly, sometimes it depend.
+
+    3. Ansible can scale to large infrastructure.
+         It means we can deal with many machines with ansible by sitting in one place you can manage them. or you can
+          go to the individual node and get the configuration as well.
+
+       There are two types of configurations. Configuration that you are trying to push and trying to pull.
+
+        1.      Configuration Management server          2.     Configuration Management server
+                    ↓            ↓                                  / |           / |
+             push   ↓            ↓ push                       pull  / |          /  | pull
+                    ↓            ↓                                 ↓  |          ↓  |
+                  Nodes        Nodes                               Nodes         Nodes
+
+        Here Nodes may be your frontend, backend and mysql is a node and ansible can push it.
+
+        1. Now we are having one server where ansible is installed and from that machine we can push the information
+            to the nodes.
+
+        2. We can also go to the node itself and we can pull the configuration as well and we don't need to push.
+
+Note: Ansible support both push and pull, We need to understand what works for us better and we need to choose one or
+        both according to our requirement
+
+
+How Ansible is Connects to Node?
+  1. Ansible uses SSH
+  2. Ansible needs inventory
+
+Now after connecting to that node how ansible is going ot manage it. because if it is shell script we hve a list of
+   commands like dnf install or systemctl commands basically.
+Now how ansible is managing about those particular things is, it is basically called as modules, earlier we are
+   calling it as modules but after 2.9 & 2.10 they came up with some thing called as collections.
+
+What is collection?
+  A collection is a group of modules. they brought one more layer that's it, earlier we used to deal with module
+    directly. but now we are dealing with collections.
+
+How ansible Handles?
+  If i want to deal with an ansible means how i do that is there is a
+         Install Collection : To install the collections
+         File Collection    : To create the files or copy the files something like that
+         Service Collection : To manage the service
+     All the above 3 collections you are going to write it in a file and that file is called as Ansible Playbook.
+
+
+Ansible Playbook to be written in YAML markup language.
+
+What is a markup language?
+ It is a digital language that will help you sharing the data between the programs like html.
+   Example: Bank Deposit Slip
+     we have three markup languages
+        1. eXtensible Markup Language(XML)
+        2. Java Script Object Notation(JSON)
+        3. Yet Another Markup Language(YAML)
+     Ansible use YAML because it is easier to write the hole things by the way. file extension can be .yml or .yaml
+
+YAML FILE:
+   Ansible is expecting the input in YAML
+   Keys(Parameters) are provided by Ansible
+   Some values are also provided by Ansible
+
+Example: sample YAMl file --> sample.yml/sample.yaml
+____________________________________________________
+-  name: some playbook         |                   |
+   hosts: all                  |                   |
+   tasks:                      |                   |
+     - name: Demo Task         | ---- play 1       |
+       ansible.builtin.yum:    |                   |
+         name: nginx           |                   |
+         state: installed      |                   | --- Playbook
+                                                   |
+-  name: Some role play        |                   |
+   hosts: all                  | ---- play 2       |
+   roles:                      |                   |
+     - demo                    |                   |
+_____________________________________________________
+Here sample.yml is playbook and in that playbook we have 2 plays
+
+Here - denotes the list
+   sample .yml is a playbook.
+   Every playbook start with a list, Meaning it can have one or more plays.
+   name keyword on play is optional and it is good to have.
+   hosts is must to have a keyword.
+   Either task/roles is a must to have role.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
