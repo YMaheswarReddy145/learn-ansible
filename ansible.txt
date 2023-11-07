@@ -93,22 +93,74 @@ Here - denotes the list
    hosts is must to have a keyword.
    Either task/roles is a must to have role.
 
+Crete a instance with a name  workstation and login to the server
+ 1. check the available version of the ansible using below command
+       sudo dnf list | grep ansible
 
+    we have ansible.noarch as 7.2 version &
+            ansible.core.x86_64 as 2.15 and core is the major we generally use
 
+ 2. Now install the ansible using the below command
+        sudo yum install ansible -y
+     so it installing python as a dependency tht means python is mandatory for ansible to run.
 
+ 3. Now we got n instance which is front end instance and that instance we are going to keep in a file and we are
+     calling tht file as  inventory file.
+         vi inv   ---- to create the inventory file and paste the private ip address of the front end instance.
 
+    give ls and check the file is created or not and also check it has the dta in the file or not by giving cat inv(filename)
 
+ 4. Now i am not going to write a git repository but we go with shell only. i crete a sample.yml file
+       vim sample.yml and provided the below data and save it
 
+       - name: sample
+         hosts: all
+         tasks:
+           - name: ping
+             ansible.builtin.ping:
 
+    Here ping is basically it is going to connect all these nodes nd it's going to give  ping response.
 
+ 5. Now if we give the below command it's failed because we need to give username and password
+     ansible-playbook -i inv sample.yml
 
+     ansible-playbook -i inv -e ansible_user=centos -e ansible_password=DevOps321 sample.yml
+         Here inv --- is a name of the inventory file which contain front end private ip address
+      now if i execute the above command it going to connect with remote node and get some response
 
+ This is how we are going to deal with ansible.
 
+ We have discussed that ansible inventory is optional because if you consider inventory as a file its optional,
+    because if you don't give the file we can directly provide the ip address in the place of file name with comma
+      if you dont give comma then it consider  it as a file.
+        ansible-playbook -i 172.31.41.11, -e ansible_user=centos -e ansible_password=DevOps321 sample.yml
 
+    suppose if you have multiple ip address you can give them here itself by providing (,)
+       1st ip,2nd ip,3rd ip,etc..
 
+Ansible Push:
+Assume that we have to run a push mechanism where the yml file is in git repository.
+ 1. clone the repository in the shell
+       git clone https://github.com/YMaheswarReddy145/learn-ansible.git
 
+ 2. Now open the learn-ansible directory
+     cd learn-ansible
 
+ 3. now provide the below command
+      ansible-playbook -i 172.31.41.11, -e ansible_user=centos -e ansible_password=DevOps321 sample.yml
+    Now we are doing push from this
 
+Ansible Pull:
+install the ansible in the machine using below commands
+    sudo yum install ansible -y
 
+Once after installing ansible give the below command
+     ansible-pull -i localhost, -U https://github.com/YMaheswarReddy145/learn-ansible.git sample.yml
 
+     Here localhost -- we are running in the same node, it means i am running in my local system only. i don't
+                       want to go and connect anywhere, i am just using my local system.
+          -U  --- represent the url
 
+Basically earlier we re cloning the repository and going in to that repository and executing the scripts but now here
+ all the things will be done by b a single command and the command will take care of these. Here we are pulling to
+  that node itself
