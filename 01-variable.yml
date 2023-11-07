@@ -1,5 +1,5 @@
 - name: Demo on variables
-  hosts: all
+  hosts: localhost
   vars:
     URL: sample.com
   tasks:
@@ -8,4 +8,6 @@
         msg: "{{ URL }}"
 
 # value start with  variable , like msg: {{ URL }} then double quotes are need, if it does not start with variable like
-# msg: Hello {{ URL }}, then quotes are not needed.
+  # msg: Hello {{ URL }}, then quotes are not needed.
+
+# first We use all as default for the hosts nd secondly we use localhost if you want to run in the local
