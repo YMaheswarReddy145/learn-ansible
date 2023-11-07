@@ -1,5 +1,5 @@
 - name: Demo on variables
-  hosts: localhost
+  hosts: all
   vars:
     URL: sample.com
   tasks:
@@ -10,4 +10,10 @@
 # value start with  variable , like msg: {{ URL }} then double quotes are need, if it does not start with variable like
   # msg: Hello {{ URL }}, then quotes are not needed.
 
-# first We use all as default for the hosts nd secondly we use localhost if you want to run in the local
+# first We use all as default for the hosts and secondly we use localhost if you want to run in the local
+# while running with hosts: all we use the below command
+  #
+
+# if you are running by giving the hosts: local host then directly we run with the below command
+  #  ansible-playbook 01.variable.yml
+  # after executing the above command we get the msg s sample.com
