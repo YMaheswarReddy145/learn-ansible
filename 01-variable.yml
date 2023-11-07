@@ -42,19 +42,22 @@
 - name: Demo on variables
   hosts: localhost
   vars:
-    URL3: example.com
-    URL4: example.com
+    URL1: example.com
+    URL2: example.com
   tasks:
-    - name: Print URL3 Variable
+    - name: Print URL1 Variable
       ansible.builtin.debug:
-        msg: "{{ URL3 }}"
+        msg: "{{ URL1 }}"
       vars:
-        URL3: samples.com
-    - name: Print URL4 Variable
+        URL1: samples.com
+    - name: Print URL2 Variable
       ansible.builtin.debug:
-        msg: "{{ URL4 }}"
+        msg: "{{ URL2 }}"
       vars:
-        URL4: samples.com
+        URL2: samples.com
 # Here we have declare a variable in play level with url: example.com and also declare a variable in task level with
   # url: samples.com. Now if i execute this i will get samples.com as output because The task level variable has high
   # priority compare to play level variable.
+
+# The highest precedence is available for CLI variable(which we declare in the command line), below is the command
+  # we declare the variable ansible-playbook 01.variable.yml -e URL1=examples.com -e URL2=examples.com
