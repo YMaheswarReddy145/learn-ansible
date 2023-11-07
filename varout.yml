@@ -1,0 +1,14 @@
+# You declare your variables dynamically the same way like shell scripting.
+# Suppose if you wanted to store a variable output of particular command output in to a variable there is a command
+  # substitution in same way in ansible also there is such concept a task level output you can store in a variable and
+  # you can use that variable as well.
+
+- name: Register Variable Example
+  hosts: localhost
+  tasks:
+    - name: get Uptime of the server
+      ansible.builtin.shell: uptime
+      register: OUT
+    - name: print OUT var
+      ansible.builtin.debug:
+        msg: "{{ OUT }}"
