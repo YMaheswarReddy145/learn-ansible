@@ -1,5 +1,5 @@
 - name: Demo on variables
-  hosts: all
+  hosts: localhost
   vars:
     URL: sample.com
   tasks:
@@ -12,8 +12,25 @@
 
 # first We use all as default for the hosts and secondly we use localhost if you want to run in the local
 # while running with hosts: all we use the below command
-  #
+  # ansible-playbook -i 172.31.41.11, -e ansible_user=centos -e ansible_password=DevOps321 01-variable.yml
+    # after executing the above command we get the msg s sample.com
 
 # if you are running by giving the hosts: local host then directly we run with the below command
   #  ansible-playbook 01.variable.yml
   # after executing the above command we get the msg s sample.com
+
+
+# Now we try to declare the variable under the task level
+- name: Demo on variables
+  hosts: localhost
+  tasks:
+    - name: Print URL1 Variable
+      ansible.builtin.debug:
+        msg: "{{ URL1 }}"
+      vars:
+        URL1: sample.com
+    - name: Print URL2 Variable
+      ansible.builtin.debug:
+        msg: "{{ URL2 }}"
+      vars:
+        URL2: sample.com
