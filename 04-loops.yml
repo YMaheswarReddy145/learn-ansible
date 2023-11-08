@@ -13,3 +13,21 @@
 
 # Now i have 4 inputs that means this loop is going to run one at a time by picking the 1st value as apple, 2nd values as
 # banana 3rd values as orange nd the 4 th values as grapes.
+
+# some times a loop also can declare like these
+- name: Demo On Loops
+  hosts: localhost
+  vars:
+    fruits:
+      - apple
+      - banana
+      - orange
+      - grapes
+  tasks:
+    - name: loops
+      ansible.builtin.debug:
+        msg: fruit - {{ item }}   # there is a default variable ansible that comes in ansible as a variable name item.
+      loop: "{{fruits}}"
+
+# Here both are same in the 2nd one we just declare a variable with list of values rather than the task level and using
+# the fruits in the loop to get the values.
