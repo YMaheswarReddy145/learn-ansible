@@ -12,4 +12,4 @@
       when: os_name == "unix"
 
 # Now in the command line if you give  ansible-playbook 03-conditions.yml -e os_name=Linux then it execute only the
-  # Linux one and skip the unix because we hve provided the condition
+  # Linux one and skip the unix because we have provided the condition.
