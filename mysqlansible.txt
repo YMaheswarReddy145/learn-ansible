@@ -1,0 +1,29 @@
+- name: Expense mysql Setup
+  hosts: all
+  become: yes      # to provide the sudo privilege we use become: yes
+  tasks:
+    - name: Disable MySQL default Version
+      ansible.builtin.shell: dnf module disable mysql -y
+
+    - name: Copy MySQL Repo File
+      ansible.builtin.copy:
+        src: mysql.repo
+        dest: /etc/yum.repos.d/mysql.repo
+
+    - name: Install MySQL Server
+      ansible.builtin.dnf:
+        name: mysql-community-server
+        state: present
+
+    - name: Start MySQL Server
+      ansible.builtin.systemd:
+        name: mysqld
+        state: restarted
+        enabled: yes
+
+    - name: Set MySQL Password
+      ansible.builtin.shell: mysql_secure_installation --set-root-pass {{MYSQL_ROOT_PASSWORD}}
+
+# Now to execute this we need to provide the below command
+  ansible-playbook -i  (private-ip-address of sql)  mysql.yml(filename) -e ansible_user=centos -e ansible_password=Dev
+  Ops321 -e MYSQL_ROOT_PASSWORD=Expensepp@1
