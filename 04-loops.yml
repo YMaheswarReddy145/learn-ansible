@@ -1,0 +1,15 @@
+# If you wnt to run the same task again and again for a different inputs then we consider the loops.
+- name: Demo On Loops
+  hosts: localhost
+  tasks:
+    - name: loops
+      ansible.builtin.debug:
+        msg: fruit - {{ item }}   # there is a default variable ansible that comes in ansible as a variable name item.
+      loop:
+        - apple
+        - banana
+        - orange
+        - grapes
+
+# Now i have 4 inputs that means this loop is going to run one at a time by picking the 1st value as apple, 2nd values as
+# banana 3rd values as orange nd the 4 th values as grapes.
