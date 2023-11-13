@@ -84,6 +84,12 @@ now execute the file with below command
     ansible-playbook 05-aws-ssm.yml
 
 
+Now we check how to create a parameter manually for our project purpose.
+  now we go in to the expense-ansible repo folder and make the changes in the code accordingly.
+
+
+
+
 
 
 
