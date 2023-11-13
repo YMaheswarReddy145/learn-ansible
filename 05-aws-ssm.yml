@@ -5,3 +5,4 @@
       debug: msg="{{ lookup('amazon.aws.aws_ssm', 'sample', region='us-east-1' ) }}"
 
 # Here sample is the name of the parameter
+# us-east-1 is the north region code

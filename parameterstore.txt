@@ -69,8 +69,8 @@ parameter store and fetch the details.
     go to google and search for docs.ansible.com ---> click on collection Index --> select amazon.ws --> ssm_parameter
     lookup to get the value form SSM parameter --> there we find the examples. below is the example we consider
       - name: lookup ssm parameter store in the current region
-        debug: msg="{{ lookup('amazon.aws.aws_ssm', 'Hello', region='us-east-2' ) }}"
-        in plce of hello we use sample you can refer the ansible code in these file 05-aws-ssm.yml
+        debug: msg="{{ lookup('amazon.aws.aws_ssm', 'Hello', region='us-east-1' ) }}"
+        in place of hello we use sample you can refer the ansible code in these file 05-aws-ssm.yml
 
 now execute the file with below command
     ansible-playbook 05-aws-ssm.yml
