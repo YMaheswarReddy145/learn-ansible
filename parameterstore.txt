@@ -1,0 +1,84 @@
+To store the password parameters in a centralized place we use the Parameter store.
+In AWS if we search for a parameter store we get a service from system manager as a feature.
+Now create a parameter by selecting the create parameter option.
+while creating the parameter we need to provide bellow things
+    1. parameter name
+    2. If we want to provide any string value then we select STRING (or) if you  want to give a password then we select
+       SECURE STRING option.
+
+This is the way to crete the parameter in parameter store and read it form the ansible.
+
+
+If i  want to store some parameters i can also go with ansible variables, but however we are trying to store it in a
+  centralized place, because the data whatever we are going to use on the projects may not be necessarily needed only
+  for ansible but lso needed for other systems.
+
+To create a parameter we follow some patterns as below:
+   1. <MICROSERVICENAME>.<ENV>.<KEY> or <MICROSERVICENAME>/<ENV>/<KEY>
+   2. <ENV>.<MICROSEVICENAME>.<KEY>
+
+  in place of . some people also use /
+We are going with this <MICROSERVICENAME>.<ENV>.<KEY> because the starting representing itself will help us im understanding
+   the microservice name
+
+
+Suppose now we create a parameter with a name sample and provide the string value as Hello World and we try to accessible
+ it from ansible.
+  1. Start the instance you required and login in to workstation(putty where we run the command)
+
+so first now if we need to get some parameter information over on the system normally from my workstation, how do i get.
+   so basically we have AWS and you want to get the information by the way we can starting using AWS CLI.
+ Now in you shell command(putty) give aws command and if you want to know about AWS CLI installation document you get it
+   from the below path
+      (https://docs.aws.amazon.com/cli/latest/reference/ssm/get-parameters.html)
+
+ 1. So now give aws ssm get-parameters --names 'sample'  (Here sample is the name that we have provide in the parameter
+    store with string data Hello World)
+       if i run the above i am getting the below error because of unable to find the AWS credentials.
+        Unable to locate credentials. You can configure credentials by running "aws configure".
+      To overcome the above issue we need to create a user in amazon, to crete this we have a service called as IAM
+      (Identity Access Management)
+      IAM --> USRS --> create user
+   In the organizations we don't have this creating user approach.
+
+Now if i don't want to create the user but my workstation still need the information from the parameter store, so how does
+ we get it. that is where ROLES comes into the picture.
+
+What is ROLE?
+ Role is nothing but providing an access to another service in Amazon.
+    IAM --> ROLES --> Create Role --> select trusted entry type(based on requirement) for now we using AWS service -->
+     select the service you need for EC2(now we using EC2 for my purpose) --> NEXT --> provide the particular access
+     permission(since i making it for my workstation so for my workstation i would consider to do everything so just for
+        time being i am going with Administrator access). this is only for my workstation and not for any other things
+     --> Next --> provide the role name(i m providing as workstation-role) --> select create a role.
+
+ Now the role we have created should be used by workstation by the way to do that we have to go for ec2 instance and
+ delegate this to that particular instance.
+  How we do is right click on the instance --> select security --> select modify IAM role -->  select the role you
+   created --> update IAM role.
+
+ Now if you go to you shell(putty) and provide the below command it execute successfully without any credentials error
+     aws ssm get-parameters --names 'sample
+  after executing the above command we get the string message we have provided.
+
+
+
+Now we tell the ansible to get the data from the parameter store so if run the playbook in my workstation it can talk to
+parameter store and fetch the details.
+ So to fetch that there is some sort of support in aws in the way of collection. There are a lot of collections now just
+    go to google and search for docs.ansible.com ---> click on collection Index --> select amazon.ws --> ssm_parameter
+    lookup to get the value form SSM parameter --> there we find the examples. below is the example we consider
+      - name: lookup ssm parameter store in the current region
+        debug: msg="{{ lookup('amazon.aws.aws_ssm', 'Hello' ) }}"
+
+you can find ansible code with the example in 05-aws-ssm.yml file.
+
+
+
+
+
+
+
+
+
+
