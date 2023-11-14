@@ -1,0 +1,18 @@
+# Facts is basically the variables which is being collected by ansible
+# Ansible is going to collect the facts by the way that means it connect to that particular node & fetches all the info,
+  # and keep it handy and so that we can use it at any point of time.
+
+# If you want to know the list of the facts that which are just variables then you can search by giving ansible facts list
+  #  so you can get the ansible documentation with the list of facts that it gathers.
+
+- name: Demo On Facts
+  hosts: localhost
+# i m giving localhost to get the facts of my information of the server only.
+  tasks:
+    - name: print Arch
+      ansible.builtin.debug:
+        var: ansible_facts
+
+
+
+
