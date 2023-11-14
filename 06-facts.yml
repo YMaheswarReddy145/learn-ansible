@@ -12,7 +12,8 @@
     - name: print Arch
       ansible.builtin.debug:
         msg: "{{ ansible_architecture }}"
-#        var: ansible_facts   it provide all the facts og the local host
+# Here ansible_architecture only gives that architecture info and i don't provide the rest of the facts
+#        var: ansible_facts   it provide all the facts of the local host
 
 
 
