@@ -29,7 +29,7 @@
 
 # Now if i want to get the output without user string then i can get it with below one,
     #   msg: "{{ ((OUT.stdout | split(','))[1] | split(' '))[2] }}" after executing with these statement we get the below output
-      #
+      #  "msg": "1"
 
 # After executing we got the output and in the "stdout": " 17:50:50 up 21 min,  1 user,  load average: 0.08, 0.02, 0.01",
 # all these details are in line now i want to split and make them in line
