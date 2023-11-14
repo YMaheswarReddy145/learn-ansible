@@ -3,6 +3,6 @@
   tasks:
     - name: Run uptime command
       ansible.builtin.shell: uptime
-# Here uptime help us to show the number of users
       register: OUT
+# Here uptime help us to show the number of users
 # here we are storing the output in the register
