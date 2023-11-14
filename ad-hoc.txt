@@ -1,0 +1,21 @@
+What is Ad-Hoc?
+  Ad-hoc means on demand.
+
+Wht os on demand?
+ Ansible playbook is a planned one so that means you planned what you need to do and we have written an ansible-playbook.
+
+
+Most of the time we use playbook but sometimes if you want to connect to a node without playbook and need to do some
+ operations, in that case Ad-hoc li we can connect to that node
+
+ Suppose i want to run a command to find the free memory on the system without using playbook and print it on the screen
+  then we hve ad-hoc
+  ansible -i localhost, all -e ansible_user=centos -e ansible_password=DevOps321 -m ansible.builtin.shell -a free
+
+  Here we have given localhost ---> to check in tht particular host
+                      all      --->
+                      -m       ---> represent module name
+        ansible.builtin.shell  --->  Module to execute
+                      -a       ---> Module args
+                     free      ---> to show the free space
+
