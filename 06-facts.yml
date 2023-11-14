@@ -11,7 +11,8 @@
   tasks:
     - name: print Arch
       ansible.builtin.debug:
-        var: ansible_facts
+        msg: "{{ ansible_architecture }}"
+#        var: ansible_facts   it provide all the facts og the local host
 
 
 
