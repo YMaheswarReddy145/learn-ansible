@@ -1,0 +1,9 @@
+# suppose if we have multiple task to perform but if the 1st task is failed it won't go to the next task, but with
+  # the help of error handling even if the previous task is failed it won't stop the executing there it will go to the
+  # next task and it will perform it.
+
+- name: Demo On Error Handling
+  hosts: localhost
+  tasks:
+    - name: Shell Command to show files
+      ansible.builtin.shell: ls
