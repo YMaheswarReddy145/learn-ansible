@@ -1,0 +1,17 @@
+Ansible uses batches for task execution, which are controlled by a parameter called forks . The default value for
+forks is 5, which means Ansible executes a task on the first five hosts, waits for the task to complete, and then
+takes the next batch of five hosts, and so on.
+
+Now if i want to enable to execute more than 5 forks then we can use the below command directly in command line.
+     ansible-playbook -f 10 your_playbook.yml
+               Here -f ------> Forks by default the value is 5 if you want more then you can give the value you need.
+                    10 ------> I am requesting for 10 folks
+     your_playbook.yml ------> Module name
+
+This above command will run the playbook with a maximum of 10 parallel processes.
+
+Id i want to edit in the Ansible Configuration File then Open the Ansible configuration file, which is usually located
+at /etc/ansible/ansible.cfg or in the current directory where you are running Ansible. If the file doesn't exist,
+you can create it. Add or modify the forks parameter
+            [defaults]
+            forks = 10
