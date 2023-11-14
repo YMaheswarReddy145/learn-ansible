@@ -9,7 +9,7 @@
 
     - name: Print No Of Users
       ansible.builtin.debug:
-        msg: "{{ ((OUT.stdout | split(','))[1] | split(','))[1] }}"
+        msg: "{{ ((OUT.stdout | split(','))[1] | split(' '))[2] }}"
 
 
 # msg: "{{ OUT }}"  --> in output it give all the details
@@ -28,7 +28,7 @@
       #  "msg": "  1 user"
 
 # Now if i want to get the output without user string then i can get it with below one,
-    #   msg: "{{ ((OUT.stdout | split(','))[1] | split(','))[1] }}" after executing with these statement we get the below output
+    #   msg: "{{ ((OUT.stdout | split(','))[1] | split(' '))[2] }}" after executing with these statement we get the below output
       #
 
 # After executing we got the output and in the "stdout": " 17:50:50 up 21 min,  1 user,  load average: 0.08, 0.02, 0.01",
