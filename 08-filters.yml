@@ -9,7 +9,7 @@
 
     - name: Print No Of Users
       ansible.builtin.debug:
-        msg: "{{ OUT.stdout | split(','))[1] }}"
+        msg: "{{ (OUT.stdout | split(','))[1] }}"
 
 
 # msg: "{{ OUT }}"  --> in output it give all the details
@@ -18,8 +18,7 @@
     #   msg: "{{ OUT.stdout | split(',') }}"
 
 # Now if i want to only the 1st value of the list then i can give the bellow one, in list the index start with 0.
-    #   msg: "{{ OUT.stdout | split(','))[1] }}"
-    # if i don't provide the extra ) in front of the index value then we get error
+    #   msg: "{{ (OUT.stdout | split(','))[1] }}"
 
 # After executing we got the output and in the "stdout": " 17:50:50 up 21 min,  1 user,  load average: 0.08, 0.02, 0.01",
 # all these details are in line now i want to split and make them in line
