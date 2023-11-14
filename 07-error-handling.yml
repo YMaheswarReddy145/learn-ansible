@@ -5,5 +5,12 @@
 - name: Demo On Error Handling
   hosts: localhost
   tasks:
-    - name: Shell Command to show files
-      ansible.builtin.shell: ls
+    - name: Shell Command
+      ansible.builtin.shell: lss
+      ignore_errors: yes
+
+# Suppose if i give lss command which is not present in place of ls it will end the job there itself it won't go next step
+# But if i provide ignore_error as yes then even the first step fail it will go to the next step without stopping the job.
+    - name: Print Hello
+      ansible.builtin.debug:
+        msg: Hello
