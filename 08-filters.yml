@@ -6,3 +6,7 @@
       register: OUT
 # Here uptime help us to show the number of users
 # here we are storing the output in the register
+
+    - name: Print No Of Users
+      ansible.builtin.debug:
+        msg: "{{ OUT }}"
